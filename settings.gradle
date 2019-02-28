@@ -1,3 +1,4 @@
 rootProject.name = 'eltexJava'
 include '2task'
+include '3task'
 
