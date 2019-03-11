@@ -1,7 +1,9 @@
 package treetask.interfaces;
 
 public interface CSV {
-    public void readFromCSV(String filename, String delim);
-    public void writeInCSV(String filename, String delim);
-    public String[] readArrayString(String filename, String delim);
+    void readFromCSV(String filename, String delim);
+    void writeInCSV(String filename, String delim);
+    String[] readArrayString(String filename, String delim);
+    void readFromBD(String databasename, String username, String password, String tablename);
+    void writeInBD(String databasename, String username, String password, String tablename);
 }

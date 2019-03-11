@@ -1,6 +1,7 @@
 package treetask.classes;
 
 import java.io.FileWriter;
+import java.sql.*;
 
 public final class FizUser extends User {
     private String address;
@@ -11,6 +12,52 @@ public final class FizUser extends User {
 
     public FizUser (String filename, String delim) {
         readFromCSV(filename, delim);
+    }
+
+    @Override
+    public void readFromBD(String databasename, String username, String password, String tablename) {
+        String url = "jdbc:mysql://localhost:3306/" + databasename;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tablename);
+
+            resultSet.first();
+            setId(Integer.parseInt(resultSet.getString(1)));
+            setName(resultSet.getString(2));
+            setPhone(resultSet.getString(3));
+            setAddress(resultSet.getString(4));
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void writeInBD(String databasename, String username, String password, String tablename) {
+        String url = "jdbc:mysql://localhost:3306/" + databasename;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+
+            String sqlRequest = "INSERT INTO " + tablename + " VALUES(" + getId() + ", '" + getName() +
+                    "', '" + getPhone() + "', '" + getAddress() + "')";
+            statement.executeUpdate(sqlRequest);
+
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -35,4 +82,7 @@ public final class FizUser extends User {
         return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

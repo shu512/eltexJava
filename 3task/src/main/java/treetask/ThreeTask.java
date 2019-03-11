@@ -3,11 +3,11 @@ package treetask;
 import treetask.classes.FizUser;
 import treetask.classes.LegalUser;
 
+
 public class ThreeTask {
     public static void main(String[] args) {
-        LegalUser stas = new LegalUser("Stas", "8923", "Nsk");
-        stas.writeInCSV("stas.csv", ";");
-        LegalUser test = new LegalUser("stas.csv", ";");
-        test.writeInCSV("test.csv", ";");
+        FizUser stas = new FizUser("test", "test", "test");
+        stas.readFromBD("eltex4taskFizUser", "shu512", "1", "users");
+        stas.writeInBD("eltex4taskFizUser", "shu512", "1", "users");
     }
 }
