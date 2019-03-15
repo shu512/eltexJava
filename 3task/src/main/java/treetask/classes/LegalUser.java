@@ -2,6 +2,8 @@ package treetask.classes;
 
 import java.io.FileWriter;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class LegalUser extends User {
     private String nameCompany;
@@ -14,6 +16,38 @@ public final class LegalUser extends User {
         readFromCSV(filename, delim);
     }
 
+
+    static public List<LegalUser> getUsersFromDB (String databasename, String username, String password, String tablename) {
+        List<LegalUser> arrayList = new ArrayList<>();
+
+        String url = "jdbc:mysql://localhost:3306/" + databasename;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tablename);
+
+            while(resultSet.next()) {
+                LegalUser temp = new LegalUser("1", "1", "1");
+                temp.setId(resultSet.getInt(1));
+                temp.setName(resultSet.getString(2));
+                temp.setPhone(resultSet.getString(3));
+                temp.setNameCompany(resultSet.getString(4));
+                arrayList.add(temp);
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            return arrayList;
+        }
+    }
+
     @Override
     public void readFromBD(String databasename, String username, String password, String tablename) {
         String url = "jdbc:mysql://localhost:3306/" + databasename;
@@ -24,7 +58,7 @@ public final class LegalUser extends User {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tablename);
 
             resultSet.first();
-            setId(Integer.parseInt(resultSet.getString(1)));
+            setId(resultSet.getInt(1));
             setName(resultSet.getString(2));
             setPhone(resultSet.getString(3));
             setNameCompany(resultSet.getString(4));

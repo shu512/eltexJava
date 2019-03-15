@@ -1,12 +1,13 @@
 package treetask.classes;
 
 import treetask.interfaces.CSV;
+import treetask.interfaces.DB;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-public abstract class User implements CSV {
+public abstract class User implements CSV, DB {
     private static int index = 1;
     private int id;
     private String name;
