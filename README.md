@@ -10,5 +10,13 @@
     1subTask: простейший клиент-сервер
     2subTask: многопоточный сервер
     3subTask: web-сервер многопоточный(клиент - браузер)
-6task:
-    1subTask:
+6task(добавлено в 3task):
+    1subTask: реализовать SpringBoot Application, RestController "/get_users_from_bd".
+    2subTask: реализовать RequestMapping("/")
+    3subTask: jQuery
+7task(добавлено в 3task):
+    1subTask: unit tests
+    2subTask: JavaDoc
+    3subTask: logger
+
+

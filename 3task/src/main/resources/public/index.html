@@ -1,3 +1,26 @@
+<!DOCTYPE html>
 <html>
-it`s test!
+<head>
+	<script type="text/javascript" src="jquery-3.3.1.js"></script>
+	<script>
+		$(document).ready(function() {
+			//$("#users").html("<h1>Hello</h1>");
+			$.ajax({dataType: "json",
+					type: "GET",
+					url: "/get_users_from_bd",
+					success: function(msg) {
+						var str = JSON.stringify(msg);
+						var arr = str.replace(new RegExp("},{", 'g'), "}<br>{");
+						$("#users").html("<p>" + arr + "</p>");
+					},
+					error: function(error) {
+						alert(error);
+					}
+				});
+		});
+	</script>
+</head>
+<body>
+	<div id="users"></div>
+</body>
 </html>
