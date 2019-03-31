@@ -1,5 +1,7 @@
 package treetask.classes;
 
+import treetask.ThreeTask;
+
 import java.io.FileWriter;
 import java.sql.*;
 import java.util.ArrayList;
@@ -61,10 +63,8 @@ public final class FizUser extends User {
             resultSet.close();
             statement.close();
             connection.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ThreeTask.log.error(ex.getMessage());
         } finally {
             return arrayList;
         }
@@ -95,10 +95,8 @@ public final class FizUser extends User {
             resultSet.close();
             statement.close();
             connection.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ThreeTask.log.error(ex.getMessage());
         }
     }
 
@@ -123,10 +121,8 @@ public final class FizUser extends User {
 
             statement.close();
             connection.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ThreeTask.log.error(ex.getMessage());
         }
     }
 
@@ -154,7 +150,7 @@ public final class FizUser extends User {
         try (FileWriter fd = new FileWriter(filename, true)) {
             fd.write(temp);
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            ThreeTask.log.error(ex.getMessage());
         }
     }
 
