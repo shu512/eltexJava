@@ -5,17 +5,40 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  Класс физического лица
+ * @author "<a href="mailto:bot-io@yandex.ru">Гусев Станислав</a>"
+ */
 public final class FizUser extends User {
     private String address;
+
+    /**
+     * @param name имя пользователя
+     * @param phone телефон пользователя
+     * @param address адрес
+     */
     public FizUser(String name, String phone, String address) {
         super(name, phone);
         this.address = address;
     }
 
+    /**
+     * Конструктор создаёт пользователя, считывая из файла
+     * @param filename имя файла
+     * @param delim разделитель
+     */
     public FizUser (String filename, String delim) {
         readFromCSV(filename, delim);
     }
 
+    /**
+     * Возвращает всех пользователей из БД
+     * @param databasename имя БД
+     * @param username имя пользователя
+     * @param password пароль пользователя
+     * @param tablename имя таблицы
+     * @return List пользователей
+     */
     static public List<FizUser> getUsersFromDB (String databasename, String username, String password, String tablename) {
         List<FizUser> arrayList = new ArrayList<>();
 
@@ -47,6 +70,13 @@ public final class FizUser extends User {
         }
     }
 
+    /**
+     * Считывает пользователя из БД, сохраняя информацию в поля
+     * @param databasename имя БД
+     * @param username имя пользователя
+     * @param password пароль пользователя
+     * @param tablename имя таблицы
+     */
     @Override
     public void readFromBD(String databasename, String username, String password, String tablename) {
         String url = "jdbc:mysql://localhost:3306/" + databasename;
@@ -72,6 +102,13 @@ public final class FizUser extends User {
         }
     }
 
+    /**
+     * Записывает информацию о пользователе в БД
+     * @param databasename имя БД
+     * @param username имя пользователя
+     * @param password пароль пользователя
+     * @param tablename имя таблицы
+     */
     @Override
     public void writeInBD(String databasename, String username, String password, String tablename) {
         String url = "jdbc:mysql://localhost:3306/" + databasename;
@@ -93,6 +130,11 @@ public final class FizUser extends User {
         }
     }
 
+    /**
+     * Чтение из файла и запись в поля класса
+     * @param filename имя файла
+     * @param delim разделитель
+     */
     @Override
     public void readFromCSV(String filename, String delim) {
         super.readFromCSV(filename, delim);
@@ -100,6 +142,11 @@ public final class FizUser extends User {
         address = parts[3];
     }
 
+    /**
+     * Запись информации о пользователе в файл
+     * @param filename имя файла
+     * @param delim разделитель
+     */
     @Override
     public void writeInCSV(String filename, String delim) {
         super.writeInCSV(filename, delim);
