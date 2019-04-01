@@ -15,15 +15,4 @@ public class FizUserTest {
         FizUser fizUser = new FizUser("Maksim", "2440505", "Novosibirsk");
         assertEquals("2440505", fizUser.getPhone());
     }
-    @Test
-    public void test_fail1() {
-        FizUser fizUser = new FizUser("Maksim", "2440505", "Novosibirsk");
-        assertEquals("asd", fizUser.getName());
-    }
-    @Test
-    public void test_fail2() {
-        FizUser fizUser = new FizUser("Maksim", "2440505", "Novosibirsk");
-        assertEquals("asd", fizUser.getName());
-    }
-
 }

@@ -18,5 +18,6 @@
     1subTask: unit tests
     2subTask: JavaDoc
     3subTask: logger
-
-
+8task:
+    1subTask: интеграция с TravisCI
+    2subTask: сборка проекта в Docker
