@@ -1,4 +1,5 @@
 # eltexJava
+[![Build Status](https://www.travis-ci.org/shu512/eltexJava.svg?branch=master)](https://www.travis-ci.org/shu512/eltexJava)
 Начало занятий: 15 февраля 2019.
 1task: калькулятор.
 2task:
